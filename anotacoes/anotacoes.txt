@@ -1,0 +1,2 @@
+quando acessar pelo git ele vai itreto para url 
+quaqndo for pelo post vai direto para o corpo do projeto
