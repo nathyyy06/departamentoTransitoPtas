@@ -13,8 +13,8 @@ datasource db {
   url      = env("DATABASE_URL")
 }
 
-model Veiculo{
-  id Int @id @defult(autoincrement())
+model Veiculo {
+  id Int @id @default(autoincrement())
   modelo String
   placa String
   cor String
