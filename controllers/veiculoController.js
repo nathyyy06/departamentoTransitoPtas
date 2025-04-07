@@ -23,7 +23,11 @@ class VeiculoController{
         res.send({veiculo});
     }
 
-    static buscarTodos(req, res) {}
+    static buscarTodos(req, res) {
+       const veiculos = await client.veiculo.findMary({});
+      
+       res.send(JSON.stringify(veiculos))
+    }
 }
 
 module.exports = VeiculoController;

@@ -5,6 +5,10 @@ const app = express();
 app.use(express.urlencoded({ extended: true}));
 app.use(express.json());
 
+const exphbs = require ("express-handlabars");
+app.engine("handlebars")
+
+
 app.get("/", (req, res) => {
     res.send("Hello Wordl")
 });
