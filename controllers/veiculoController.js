@@ -9,8 +9,6 @@ class VeiculoController{
     }
 
     static async cadastrar(req, res) {
-        res.send(JSON.stringify(req.body));
-
         const {modelo, placa, ano, cor} = req.body
 
         const veiculo = await client.veiculo.create({data: {
@@ -20,13 +18,15 @@ class VeiculoController{
             cor
         }});
 
-        res.send({veiculo});
+        res.redirect("/veiculos/todos");
     }
 
     static async buscarTodos(req, res) {
-       const veiculos = await client.veiculo.findMary({});
+       const veiculos = await client.veiculo.findMany({});
       
-       res.send("usuarios");
+       res.render("veiculos", {veiculos});
+
+      
     }
 }
 
