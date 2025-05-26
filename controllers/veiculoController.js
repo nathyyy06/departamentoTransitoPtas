@@ -4,9 +4,7 @@ const { PrismaClient } = require("@prisma/client");
 const client = new PrismaClient();
 
 class VeiculoController{
-    static formCadastro(req, res) {
-        res.render("formVeiculo");
-    }
+    
 
     static async cadastrar(req, res) {
         const {modelo, placa, ano, cor} = req.body
@@ -18,7 +16,9 @@ class VeiculoController{
             cor
         }});
 
-        res.redirect("/veiculos/todos");
+        res.json({
+            veiculoId: veiculo.id,
+        });
     }
 
     static async buscarTodos(req, res) {
