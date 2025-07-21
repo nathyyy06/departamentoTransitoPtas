@@ -1,9 +1,9 @@
 const router = require("express").Router();
-const veiculoController = require("../controllers/veiculoController");
 
+const VeiculoController = require("../controllers/VeiculoController");
 
-router.post("/cadastro",veiculoController.cadastrar) ;
+router.post("/cadastro", VeiculoController.cadastrar);
 
-router.get("/todos", veiculoController.buscarTodos);
+router.get("/buscar/:id?", VeiculoController.buscarTodos);
 
 module.exports = router;

@@ -1,32 +1,37 @@
 const path = require("path");
-
 const { PrismaClient } = require("@prisma/client");
-const client = new PrismaClient();
 
-class VeiculoController{
-    
+const prisma = new PrismaClient();
 
-    static async cadastrar(req, res) {
-        const {modelo, placa, ano, cor} = req.body
 
-        const veiculo = await client.veiculo.create({data: {
-            modelo,
-            placa,
-            ano: parseInt(ano),
-            cor
-        }});
-
-        res.json({
-            veiculoId: veiculo.id,
-        });
+class VeiculoController {
+    static async cadastrar(req,res) {
+      const veiculo = await prisma.veiculo.create({
+       
+        data: {
+          placa: req.body.placa,
+          modelo: req.body.modelo,
+          cor: req.body.cor,
+          ano: parseInt(req.body.ano),
+        }
+      });
+       res.json({
+         veiculoId: veiculo.id,
+       });
     }
 
-    static async buscarTodos(req, res) {
-       const veiculos = await client.veiculo.findMany({});
-      
-       res.render("veiculos", {veiculos});
 
-      
+    static async buscarTodos(req,res) {
+       const where = {};
+       if(req.params.id = null){
+        where.id = parseInt(req.params.id);
+       }
+       const veiculos = await prisma.veiculo.findMany({
+        where: where,
+       });
+       res.json({
+        veiculos,
+       });
     }
 }
 
