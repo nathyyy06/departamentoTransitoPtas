@@ -1,3 +1,5 @@
+npm install @prisma/client
+npm install prisma --save-dev
 generator client {
   provider = "prisma-client-js"
 }

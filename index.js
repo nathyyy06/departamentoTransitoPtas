@@ -1,21 +1,25 @@
 const express = require("express");
+const path = require("path");
 const app = express();
 
-// Capturar campos enviados po POST
-app.use(express.urlencoded({ extended: true}));
+// Capturar campos enviados por POST
+app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
 
-const exphbs = require ("express-handlebars");
-app.engine("handlebars", exphbs.engine());
-app.set("view engine", "handlebars");
+// Servir arquivos estáticos (CSS, JS, imagens)
+app.use(express.static(path.join(__dirname, "public")));
 
-
+// Rota principal: mostrar o formulário HTML
 app.get("/", (req, res) => {
-    res.render("home")
+    res.sendFile(path.join(__dirname, "views", "formVeiculo.html"));
 });
-const veiculoRoutes = require("./routes/veiculoRoutes")
+
+// Importar as rotas de veículos
+const veiculoRoutes = require("./routes/veiculoRoutes");
 app.use("/veiculos", veiculoRoutes);
 
-app.listen(8000, (err) => {
-    console.log("Aplicação rodando em localhost:8000")
-})
+// Porta do servidor
+const PORT = 8000;
+app.listen(PORT, () => {
+    console.log(`Aplicação rodando em http://localhost:${PORT}`);
+});

@@ -17,7 +17,8 @@ class UsuarioController {
         data: {
           nome,
           email,
-          senha: hashSenha, 
+          senha: hashSenha,
+          
       }
       });
        res.json({
